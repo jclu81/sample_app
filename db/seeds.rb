@@ -8,7 +8,8 @@
 User.create!(name:  "Example User",
              email: "example@railstutorial.org",
              password:              "foobar",
-             password_confirmation: "foobar")
+             password_confirmation: "foobar",
+             admin: true)
 
 99.times do |n|
   name  = Faker::Name.name
@@ -19,3 +20,13 @@ User.create!(name:  "Example User",
                password:              password,
                password_confirmation: password)
 end
+
+99.times do |n|
+  name  = "room#{n+1}"
+  description = Faker::Lorem.sentence(5)
+  room = Room.create!(name:  name,
+               description: description)
+  User.all[rand(0..99)].book_room(room)
+end
+
+

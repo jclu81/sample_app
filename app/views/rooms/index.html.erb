@@ -1,0 +1,19 @@
+<% provide(:title, 'All rooms') %>
+<h1>All rooms</h1>
+
+<%= will_paginate %>
+
+<ul class="rooms">
+  <% @rooms.each do |room| %>
+    <li>
+      <%= link_to room.name, room %>
+      <% if current_user.admin? %>
+        | <%= link_to "edit", edit_room_path(room) %>
+        | <%= link_to "delete", room, method: :delete,
+                      data: {confirm: "You sure?"} %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<%= will_paginate %>

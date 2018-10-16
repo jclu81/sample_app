@@ -1,0 +1,26 @@
+<% provide(:title, @room.name) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1>
+        <%= @room.name %>
+      </h1>
+      <%= @room.description %>
+      <h2> Joined people </h2>
+      <% @room.users.each do |user| %>
+        <li>
+          <%= user.name %>
+        </li>
+      <% end %>
+
+      <% if logged_in? %>
+        <% if current_user.has_room?(@room) %>
+          <%= render 'users/cancel_room' %>
+        <% else %>
+          <%= render 'users/book_room' %>
+        <% end %>
+      <% end %>
+    </section>
+
+  </aside>
+</div>

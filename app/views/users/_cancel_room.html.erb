@@ -1,0 +1,4 @@
+<%= form_for(current_user.active_relationships.find_by(room_id: @room.id),
+             html: { method: :delete }) do |f| %>
+  <%= f.submit "Cancel", class: "btn btn-primary"%>
+<% end %>

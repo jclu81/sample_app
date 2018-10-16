@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  has_many :active_relationships, class_name: "Relationship",
+           foreign_key: "user_id", dependent: :destroy
+  has_many :rooms, through: :active_relationships, source: :room
   attr_accessor :remember_token
   before_save {self.email = email.downcase}
   validates :name, presence: true, length: {maximum: 50}
@@ -32,5 +35,17 @@ class User < ApplicationRecord
 
   def forget
     update_attribute(:remember_digest, nil)
+  end
+
+  def book_room(room)
+    rooms << room
+  end
+
+  def cancel_room(room)
+    rooms.delete(room)
+  end
+
+  def has_room?(room)
+    rooms.include?(room)
   end
 end
