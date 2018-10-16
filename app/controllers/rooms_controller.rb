@@ -46,9 +46,4 @@ class RoomsController < ApplicationController
     redirect_to rooms_url
   end
 
-  private
-
-  def room_params
-    params.require(:room).permit(:name, :description)
-  end
 end
